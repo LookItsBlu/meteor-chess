@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Capa_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 53 53"
+   style="enable-background:new 0 0 53 53;"
+   xml:space="preserve"
+   sodipodi:docname="rook-black.svg"
+   inkscape:version="0.92.1 r15371"><metadata
+   id="metadata53"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs51"><filter
+     style="color-interpolation-filters:sRGB;"
+     inkscape:label="Invert"
+     id="filter59"><feColorMatrix
+       type="hueRotate"
+       values="180"
+       result="color1"
+       id="feColorMatrix55" /><feColorMatrix
+       values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+       result="color2"
+       id="feColorMatrix57" /></filter></defs><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="480"
+   id="namedview49"
+   showgrid="false"
+   inkscape:zoom="4.4528302"
+   inkscape:cx="22.569915"
+   inkscape:cy="26.5"
+   inkscape:window-x="542"
+   inkscape:window-y="96"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Capa_1" />
+<g
+   id="g16"
+   style="filter:url(#filter59)">
+	<polygon
+   style="fill:#E5B55B;"
+   points="35.501,42 17.5,42 19.5,20 33.501,20  "
+   id="polygon2" />
+	<path
+   style="fill:#BE8400;"
+   d="M36.5,20h-20c-1.381,0-2.5-1.119-2.5-2.5v0c0-1.381,1.119-2.5,2.5-2.5h20c1.381,0,2.5,1.119,2.5,2.5   v0C39,18.881,37.881,20,36.5,20z"
+   id="path4" />
+	<rect
+   x="11.5"
+   y="48"
+   style="fill:#BA8100;"
+   width="30"
+   height="5"
+   id="rect6" />
+	<path
+   style="fill:#D9A72E;"
+   d="M39.5,48h-26v-2.843c0-1.743,1.413-3.157,3.157-3.157h19.686c1.743,0,3.157,1.413,3.157,3.157V48z"
+   id="path8" />
+	<polygon
+   style="fill:#E5B55B;"
+   points="35.5,0 34.5,5 29.5,5 29.5,0 23.5,0 23.5,5 19.5,5 17.5,0 13.5,0 16.5,15 16.5,15 36.5,15    36.5,15 39.5,0  "
+   id="polygon10" />
+	<polygon
+   style="fill:#BE8400;"
+   points="17.955,37 35.046,37 34.591,32 18.409,32  "
+   id="polygon12" />
+	<polygon
+   style="fill:#F9C97D;"
+   points="15.9,12 37.1,12 37.9,8 15.1,8  "
+   id="polygon14" />
+</g>
+<g
+   id="g18">
+</g>
+<g
+   id="g20">
+</g>
+<g
+   id="g22">
+</g>
+<g
+   id="g24">
+</g>
+<g
+   id="g26">
+</g>
+<g
+   id="g28">
+</g>
+<g
+   id="g30">
+</g>
+<g
+   id="g32">
+</g>
+<g
+   id="g34">
+</g>
+<g
+   id="g36">
+</g>
+<g
+   id="g38">
+</g>
+<g
+   id="g40">
+</g>
+<g
+   id="g42">
+</g>
+<g
+   id="g44">
+</g>
+<g
+   id="g46">
+</g>
+</svg>

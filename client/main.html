@@ -1,0 +1,37 @@
+<head>
+  <title>Chess</title>
+</head>
+
+<body>
+    {{> boardList }}
+</body>
+
+<template name='boardList'>
+    {{#each chessboards}}
+        {{> chessboard cells=board}}
+    {{/each}}
+</template>
+
+<template name='chessboard'>
+    <div class='chess-board'>
+        {{#each cells}}
+            {{> chessRow row=this rowIndex=@index}}
+        {{/each}}
+    </div>
+</template>
+
+<template name='chessRow'>
+    <div class='chess-row'>
+        {{#each row}}
+            {{> chessCell piece=this row=rowIndex col=@index}}
+        {{/each}}
+    </div>
+</template>
+
+<template name='chessCell'>
+    <div class='chess-cell'>
+        {{#if piece}}
+            <img src='images/chess/{{codeToPiece piece}}.svg'/>
+        {{/if}}
+    </div>
+</template>
