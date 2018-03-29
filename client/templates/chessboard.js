@@ -3,25 +3,47 @@ import { ReactiveVar } from 'meteor/reactive-var'
 
 import { Chessboards } from '../../db/collections.js'
 
-Template.chessboard.helpers({
+var chess_id, row_init, row_final, col_init, col_final
+var first_cell = null
 
+Template.chessboard.helpers({
+    codeToPiece(code) {
+        let translation = {
+            'r': 'rook', 'b': 'bishop', 'k': 'knight',
+            'Q': 'queen', 'K': 'king', 'p': 'pawn'
+        }
+        let black_white = code.indexOf('2')>=0 ? 'black' : 'white'
+
+        return translation[code[0]] + '-' + black_white
+    }
 })
 
 Template.chessboard.events({
-    resetBoard() {
-        Chessboards.remove({})
-        Chessboards.insert({
-            chessid: 1,
-            board: [
-                ['r', 'b', 'k', 'Q', 'K', 'k', 'b', 'r'],
-                ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
-                ['', '', '', '', '', '', '', ''],
-                ['', '', '', '', '', '', '', ''],
-                ['', '', '', '', '', '', '', ''],
-                ['', '', '', '', '', '', '', ''],
-                ['p2', 'p2', 'p2', 'p2', 'p2', 'p2', 'p2', 'p2'],
-                ['r2', 'b2', 'k2', 'Q2', 'K2', 'k2', 'b2', 'r2']
-            ]
-        })
+    'click .chess-cell': e => {
+        chess_id = document.querySelector('.chess-board').getAttribute('data-chess')
+
+        // if the first cell hasn't been set, initialize the move
+        if(first_cell == null && e.target.className.indexOf('chess-piece') > -1) {
+            first_cell = e.currentTarget
+            row_init = first_cell.getAttribute('data-row')
+            col_init = first_cell.getAttribute('data-col')
+            first_cell.classList.add('cell-selected')
+        } else {
+            // if the second cell is the same as the first one, cancel the move
+            if(e.currentTarget === first_cell || e.target.className.indexOf('chess-piece') > -1) {
+                first_cell.classList.remove('cell-selected')
+                first_cell = null
+            } else {
+                // execute the move
+                first_cell.classList.remove('cell-selected')
+                row_final = e.currentTarget.getAttribute('data-row')
+                col_final = e.currentTarget.getAttribute('data-col')
+                Meteor.call('movePiece', chess_id, row_init, row_final, col_init, col_final)
+                first_cell = null
+            }
+        }
+    },
+    'click button': e => {
+        Meteor.call('resetBoard', e.target.getAttribute('data-chess'))
     }
 })
