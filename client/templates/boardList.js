@@ -5,7 +5,7 @@ import { Chessboards } from '../../db/collections.js'
 
 Template.boardList.helpers({
     chessboards: () => (
-        Chessboards.find({}, {fields: {'board':1}})
+        Chessboards.find({})
     )
 })
 
