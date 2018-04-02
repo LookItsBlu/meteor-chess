@@ -5,6 +5,8 @@ import { Chessboards } from '../../db/collections.js'
 
 var chess_id, row_init, row_final, col_init, col_final
 var first_cell = null
+var curr_player = 1
+var max_players = 2
 
 Template.chessboard.helpers({
     codeToPiece(code) {
@@ -40,6 +42,9 @@ Template.chessboard.events({
                 col_final = e.currentTarget.getAttribute('data-col')
                 Meteor.call('movePiece', chess_id, row_init, row_final, col_init, col_final)
                 first_cell = null
+
+                // change player
+                if(++curr_player > max_players) curr_player = 1
             }
         }
     },
