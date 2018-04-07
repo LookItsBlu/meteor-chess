@@ -1,6 +1,12 @@
-import { Chessboards } from '../db/collections.js'
+import { Chessboards } from '/db/collections.js'
 
 export default {
+    'createGame': () => {
+        
+    },
+    'joinGame': () => {
+
+    },
     'movePiece': (chess_id, row_init, row_final, col_init, col_final)=>{
         var current_board = Chessboards.find(
             { chessid: parseInt(chess_id) }

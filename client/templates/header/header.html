@@ -1,9 +1,23 @@
 <template name='header'>
     <header>
-        <img class='header-logo' src='images/chesseor-logo.svg'/>
+        <nav class='left'>
+            {{#if isLoggedIn }}
+                <a href="/game/create">Create a game</a>
+                <a href="/game/join">Join a game</a>
+            {{/if}}
+        </nav>
+        
+        <div class='header-logo'>
+          <a href="/"><img src='/images/chesseor-logo.svg'/></a>
+        </div>
 
-        <nav>
-            <a href="/login">Connection</a>
+        <nav class='right'>
+            {{#if isLoggedIn }}
+                <a href="/user/{{ username }}">Connected as {{ username }}</a>
+                <a href="/user/logout">Log out</a>
+            {{else}}
+                <a href="/user/login">Log in</a>
+            {{/if}}
         </nav>
     </header>
 </template>
