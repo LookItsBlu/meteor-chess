@@ -1,5 +1,7 @@
 ![Chesseor logo](readme-logo.svg)
-
+  
+  &nbsp;
+  
 ## Install
 
 In order to use the project, make sure to install both the npm packages as well as the meteor packages
