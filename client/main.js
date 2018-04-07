@@ -1,6 +1,4 @@
 import './main.html'
+import './main.styl'
 
 import './routes.js'
-
-import './templates/boardList.js'
-import './templates/chessboard.js'

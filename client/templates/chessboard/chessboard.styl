@@ -1,0 +1,28 @@
+.chess-board
+  width: calc(var(--cell-size)*8)
+  height calc(var(--cell-size)*8)
+  display flex
+  flex-direction column
+
+.chess-row
+  display flex
+  flex-direction row
+
+.chess-cell
+  width var(--cell-size)
+  height var(--cell-size)
+
+  img
+    display block
+
+  &.cell-selected
+    background-color #0099ff!important
+
+
+.chess-row:nth-child(odd) .chess-cell:nth-child(odd),
+.chess-row:nth-child(even) .chess-cell:nth-child(even)
+  background-color var(--board-color-1)
+
+.chess-row:nth-child(odd) .chess-cell:nth-child(even),
+.chess-row:nth-child(even) .chess-cell:nth-child(odd)
+  background-color var(--board-color-2)

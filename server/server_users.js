@@ -1,3 +1,5 @@
+import { Users } from '../db/collections.js'
+
 export default {
     'addNewUser': (user_id, user_name, user_mail, user_password) => {
         Users.insert({

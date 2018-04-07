@@ -1,7 +1,10 @@
+import './chessboard.html'
+import './chessboard.styl'
+
 import { Template } from 'meteor/templating'
 import { ReactiveVar } from 'meteor/reactive-var'
 
-import { Chessboards } from '../../db/collections.js'
+import { Chessboards } from '../../../db/collections.js'
 
 var chess_id, row_init, row_final, col_init, col_final
 var first_cell = null

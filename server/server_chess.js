@@ -1,3 +1,5 @@
+import { Chessboards } from '../db/collections.js'
+
 export default {
     'movePiece': (chess_id, row_init, row_final, col_init, col_final)=>{
         var current_board = Chessboards.find(

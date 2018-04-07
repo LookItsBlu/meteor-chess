@@ -1,0 +1,18 @@
+<template name='chessboard'>
+    <div class='chess-board' data-chess='{{chessId}}'>
+        <button data-chess='{{chessId}}'>Reset</button>
+        {{#each row}}
+            {{#let rowIndex=@index}}
+            <div class='chess-row'>
+                {{#each this}}
+                <div class='chess-cell' data-row='{{rowIndex}}' data-col='{{@index}}'>
+                    {{#if this}}
+                    <img class='chess-piece' src='/images/chess/{{codeToPiece this}}.svg'/>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+            {{/let}}
+        {{/each}}
+    </div>
+</template>
