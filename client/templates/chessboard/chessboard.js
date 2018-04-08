@@ -1,17 +1,27 @@
 import './chessboard.html'
 import './chessboard.styl'
 
-import { Template } from 'meteor/templating'
+import { ReactiveVar } from 'meteor/reactive-var'
 
-import { Chessboards } from '/db/collections.js'
+let board = new ReactiveVar([])
 
 var chess_id, row_init, row_final, col_init, col_final
 var first_cell = null
 var curr_player = 1
 var max_players = 2
 
+function getBoard() {
+    Meteor.call('getBoardById', FlowRouter.getParam('gameid'), (err, result) => {
+        board.set(result)
+    })
+}
+
+Template.chessboard.onCreated(()=>{
+    getBoard()
+})
+
 Template.chessboard.helpers({
-    codeToPiece(code) {
+    'codeToPiece'(code) {
         let translation = {
             'r': 'rook', 'b': 'bishop', 'k': 'knight',
             'Q': 'queen', 'K': 'king', 'p': 'pawn'
@@ -19,13 +29,12 @@ Template.chessboard.helpers({
         let black_white = code.indexOf('2')>=0 ? 'black' : 'white'
 
         return translation[code[0]] + '-' + black_white
-    }
+    },
+    'getRows'() { return board.get().board }
 })
 
 Template.chessboard.events({
     'click .chess-cell': e => {
-        chess_id = document.querySelector('.chess-board').getAttribute('data-chess')
-
         // if the first cell hasn't been set, initialize the move
         if(first_cell == null && e.target.className.indexOf('chess-piece') > -1) {
             first_cell = e.currentTarget
@@ -42,15 +51,18 @@ Template.chessboard.events({
                 first_cell.classList.remove('cell-selected')
                 row_final = e.currentTarget.getAttribute('data-row')
                 col_final = e.currentTarget.getAttribute('data-col')
-                Meteor.call('movePiece', chess_id, row_init, row_final, col_init, col_final)
-                first_cell = null
 
+                Meteor.call('movePiece', board.get()._id, row_init, row_final, col_init, col_final)
+                getBoard()
+                first_cell = null
+                
                 // change player
                 if(++curr_player > max_players) curr_player = 1
             }
         }
     },
-    'click button': e => {
-        Meteor.call('resetBoard', e.target.getAttribute('data-chess'))
+    'click .reset': evt => {
+        evt.preventDefault()
+        Meteor.call('resetBoard', board.get()._id)
     }
 })

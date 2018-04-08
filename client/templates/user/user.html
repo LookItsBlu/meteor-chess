@@ -1,0 +1,19 @@
+<template name='user'>
+    <div class='user'>
+        <div class="account-picture">
+
+        </div>
+        <div class="account-info">
+            <h1>{{ getUser 'name' }}</h1>
+            {{#if anotherUser}}
+                {{#if isFriend}}
+                    <button type="button" class="remove-friend">Remove from friends</button>
+                {{else}}
+                    <button type="button" class="add-friend">Add as a friend</button>
+                {{/if}}
+            {{/if}}
+            <br>
+            <span>Mail: {{ getUser 'mail' }}</span>
+        </div>
+    </div>
+</template>

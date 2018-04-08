@@ -1,0 +1,16 @@
+<template name='userList'>
+    <div class="userList">
+        <ul>
+            {{#each user in getUsers}}
+                <li>
+                {{#if isFriend user }}
+                    <i class='fas fa-user' style='color: green'></i>
+                {{else}}
+                    <i class='fas fa-user-plus'></i>
+                {{/if}}
+                {{user.name}} - <a href='/user/{{user.name}}'>See his profile</a>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+</template>

@@ -1,11 +1,10 @@
-<template name='chessboard'>
-    <div class='chess-board'>
-        <button class='reset'>Reset</button>
-        {{#each getRows}}
+<template name='previewBoard'>
+    <div class='previewBoard'>
+        {{#each row}}
         {{#let rowIndex=@index}}
         <div class='chess-row'>
             {{#each this}}
-            <div class='chess-cell' data-row='{{rowIndex}}' data-col='{{@index}}'>
+            <div class='chess-cell'>
                 {{#if this}}
                 <img class='chess-piece' src='/images/chess/{{codeToPiece this}}.svg'/>
                 {{/if}}

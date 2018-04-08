@@ -1,5 +1,7 @@
 <template name='boardList'>
-    {{#each chessboards}}
-        {{> chessboard chessId=chessid row=board}}
+    {{#each board in getBoards}}
+        <a href='/play/{{ board._id }}'><h1>{{ board.name }}</h1></a>
+        <h2>By {{ board.creator }}</h2>
+        {{> previewBoard row=board.board}}
     {{/each}}
 </template>
