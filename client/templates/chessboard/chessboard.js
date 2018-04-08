@@ -3,6 +3,9 @@ import './chessboard.styl'
 
 import { ReactiveVar } from 'meteor/reactive-var'
 
+Chessboard = new Mongo.Collection('Chessboard')
+
+// variables
 let board = new ReactiveVar([])
 
 var chess_id, row_init, row_final, col_init, col_final
@@ -10,13 +13,15 @@ var first_cell = null
 var curr_player = 1
 var max_players = 2
 
+// functions
 function getBoard() {
     Meteor.call('getBoardById', FlowRouter.getParam('gameid'), (err, result) => {
         board.set(result)
     })
 }
 
-Template.chessboard.onCreated(()=>{
+// template
+Template.chessboard.onCreated(() => {
     getBoard()
 })
 
@@ -55,7 +60,7 @@ Template.chessboard.events({
                 Meteor.call('movePiece', board.get()._id, row_init, row_final, col_init, col_final)
                 getBoard()
                 first_cell = null
-                
+
                 // change player
                 if(++curr_player > max_players) curr_player = 1
             }

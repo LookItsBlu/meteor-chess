@@ -2,7 +2,7 @@
     <header>
         <nav class='left'>
             {{#if isLoggedIn }}
-                <a href="/game/create">Create a game</a>
+                <a href="/game/create" class='important'>Create a game</a>
                 <a href="/game/join">Join a game</a>
             {{/if}}
         </nav>
@@ -15,9 +15,9 @@
             {{#if isLoggedIn }}
                 <a href='/userlist'>User List</a>
                 <a href='/user/{{ username }}'>Connected as {{ username }}</a>
-                <a href='/user/logout'>Log out</a>
+                <a href='/logout'>Log out</a>
             {{else}}
-                <a href='/user/login'>Log in</a>
+                <a href='/login' class='important'>Log in</a>
             {{/if}}
         </nav>
     </header>
