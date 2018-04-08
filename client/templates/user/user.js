@@ -3,29 +3,25 @@ import './user.styl'
 
 import { ReactiveVar } from 'meteor/reactive-var'
 
-let userObj = new ReactiveVar({})
-let friendsList = new ReactiveVar([])
 let isFriend = new ReactiveVar(false)
 
 function getFriendList() {
-    Meteor.call('getUserById', JSON.parse(localStorage.getItem('Session')).user, (err, result) => {
-        friendsList.set(result.friends)
-        isFriend.set(result.friends.includes(userObj.get()['_id']))
-    })
+    isFriend.set(
+        Users.findOne({ '_id' : JSON.parse(localStorage.getItem('Session')).user }).friends.includes(
+            Users.findOne({ 'name' : FlowRouter.getParam('username') })._id
+        )
+    )
 }
 
 Template.user.onCreated(()=>{
-    Meteor.call('getUserByName', FlowRouter.getParam('username'), (err, result) => {
-        userObj.set(result)
-    })
     getFriendList()
 })
 
 Template.user.helpers({
-    'getUser'(info) { return userObj.get()[info] || '' },
-    'anotherUser'() {
-        return userObj.get()._id !== JSON.parse(localStorage.getItem('Session')).user
-    },
+    'getUser': (info) => Users.findOne({ 'name' : FlowRouter.getParam('username') })[info],
+    'anotherUser': () => (
+        Users.findOne({ 'name' : FlowRouter.getParam('username') })._id !== JSON.parse(localStorage.getItem('Session')).user
+    ),
     'isFriend'() { return isFriend.get() }
 })
 
@@ -33,7 +29,8 @@ Template.user.events({
     'click .add-friend'(evt) {
         evt.preventDefault()
         Meteor.call('addFriend',
-            JSON.parse(localStorage.getItem('Session')).user, userObj.get()['_id'],
+            JSON.parse(localStorage.getItem('Session')).user,
+            Users.findOne({ 'name' : FlowRouter.getParam('username') })._id,
             (err, result) => {
                 getFriendList()
                 alert('Friend Added')
@@ -43,7 +40,8 @@ Template.user.events({
     'click .remove-friend'(evt) {
         evt.preventDefault()
         Meteor.call('removeFriend',
-            JSON.parse(localStorage.getItem('Session')).user, [userObj.get()['_id']],
+            JSON.parse(localStorage.getItem('Session')).user,
+            [Users.findOne({ 'name' : FlowRouter.getParam('username') })._id],
             (err, result) => {
                 getFriendList()
                 alert('Friend Removed')
