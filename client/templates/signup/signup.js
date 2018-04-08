@@ -19,7 +19,7 @@ Template.signup.events({
                     console.log(err.details)
                 }
                 else {
-                    FlowRouter.redirect('/user/login')
+                    FlowRouter.redirect('/login')
                 }
             }
         )

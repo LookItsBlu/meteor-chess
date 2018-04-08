@@ -1,29 +1,10 @@
 import './chessboard.html'
 import './chessboard.styl'
 
-import { ReactiveVar } from 'meteor/reactive-var'
-
-Chessboard = new Mongo.Collection('Chessboard')
-
-// variables
-let board = new ReactiveVar([])
-
 var chess_id, row_init, row_final, col_init, col_final
 var first_cell = null
 var curr_player = 1
 var max_players = 2
-
-// functions
-function getBoard() {
-    Meteor.call('getBoardById', FlowRouter.getParam('gameid'), (err, result) => {
-        board.set(result)
-    })
-}
-
-// template
-Template.chessboard.onCreated(() => {
-    getBoard()
-})
 
 Template.chessboard.helpers({
     'codeToPiece'(code) {
@@ -35,7 +16,7 @@ Template.chessboard.helpers({
 
         return translation[code[0]] + '-' + black_white
     },
-    'getRows'() { return board.get().board }
+    'getRows'() { return Chessboards.findOne({ '_id' : FlowRouter.getParam('gameid') }).board }
 })
 
 Template.chessboard.events({
@@ -57,7 +38,7 @@ Template.chessboard.events({
                 row_final = e.currentTarget.getAttribute('data-row')
                 col_final = e.currentTarget.getAttribute('data-col')
 
-                Meteor.call('movePiece', board.get()._id, row_init, row_final, col_init, col_final)
+                Meteor.call('movePiece', FlowRouter.getParam('gameid'), row_init, row_final, col_init, col_final)
                 getBoard()
                 first_cell = null
 
@@ -68,6 +49,6 @@ Template.chessboard.events({
     },
     'click .reset': evt => {
         evt.preventDefault()
-        Meteor.call('resetBoard', board.get()._id)
+        Meteor.call('resetBoard', FlowRouter.getParam('gameid'))
     }
 })
