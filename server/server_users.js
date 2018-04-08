@@ -21,7 +21,8 @@ export default {
             Users.insert({
                 'name': username,
                 'mail': email,
-                'pass': hash
+                'pass': hash,
+                'friends': []
             })
         }))
     },
@@ -32,15 +33,20 @@ export default {
         else {
             return bcrypt.compare(pass, user.pass).then(result=> {
                 if(result) {
-                    return {
-                        'id' : Meteor.call('createSession', user._id),
-                        'username' : username
-                     }
+                    return Meteor.call('createSession', user._id)
                 } else
                     throw new Meteor.Error(14, 'Incorrect password', 'The password entered is incorrect!')
             })
         }
     },
+
     'removeUser': (email) => { Users.remove({'mail': email}) },
-    'getUser': (username) => ( Users.findOne({ 'name': username }) )
+
+    'getUserById': (userid) => ( Users.findOne({ '_id': userid }) ),
+    'getUserByName': (username) => ( Users.findOne({ 'name': username }) ),
+    'getAllUsers': () => ( Users.find({}).fetch() ),
+    'getOtherUsers': (userid) => ( Users.find({ '_id' : { $ne : userid }}).fetch() ),
+
+    'addFriend': (userid, friendid) => { Users.update({ '_id' : userid }, { $push : { 'friends' : friendid } }) },
+    'removeFriend': (userid, friendid) => { Users.update({ '_id' : userid }, { $pullAll : { 'friends' : friendid } }) }
 }

@@ -6,17 +6,18 @@
                 <a href="/game/join">Join a game</a>
             {{/if}}
         </nav>
-        
+
         <div class='header-logo'>
           <a href="/"><img src='/images/chesseor-logo.svg'/></a>
         </div>
 
         <nav class='right'>
             {{#if isLoggedIn }}
-                <a href="/user/{{ username }}">Connected as {{ username }}</a>
-                <a href="/user/logout">Log out</a>
+                <a href='/userlist'>User List</a>
+                <a href='/user/{{ username }}'>Connected as {{ username }}</a>
+                <a href='/user/logout'>Log out</a>
             {{else}}
-                <a href="/user/login">Log in</a>
+                <a href='/user/login'>Log in</a>
             {{/if}}
         </nav>
     </header>

@@ -5,12 +5,13 @@ export default {
         // first, remove the sessions already opened for this user
         Sessions.remove({ 'userid' : userid })
 
-        return Sessions.insert({
-            'userid' : userid,
-            'expiration' : Date.now()+(48*3600000)
-        }, (err, inserted) => {
-            return inserted._id
-        })
+        return {
+            session: Sessions.insert({
+                'userid' : userid,
+                'expiration' : Date.now()+(48*3600000)
+            }),
+            user: userid
+        }
     },
     'checkSession': (SessionID) => {
         if(Sessions.findOne({ '_id' : SessionID }).expiration < Date.now()) {

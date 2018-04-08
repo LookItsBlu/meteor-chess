@@ -18,6 +18,9 @@ Template.signup.events({
                 if(err) {
                     console.log(err.details)
                 }
+                else {
+                    FlowRouter.redirect('/user/login')
+                }
             }
         )
     }
