@@ -4,9 +4,11 @@ import './header.styl'
 let username = new ReactiveVar('')
 
 Template.header.onCreated(()=>{
-    Meteor.call('getUserById', JSON.parse(localStorage.getItem('Session')).user, (err, result) => {
-        username.set(result.name)
-    })
+    if(localStorage.getItem('Session')) {
+        Meteor.call('getUserById', JSON.parse(localStorage.getItem('Session')).user, (err, result) => {
+            username.set(result.name)
+        })
+    }
 })
 
 Template.header.helpers({

@@ -1,11 +1,11 @@
 // Check user session on route change
-FlowRouter.triggers.enter(() => {
+FlowRouter.triggers.enter([() => {
     if( localStorage.getItem('Session') ) {
         Meteor.call('checkSession', JSON.parse(localStorage.getItem('Session')).session, (err, result) => {
             if( result && Session.get('isLoggedIn') != true ) Session.set('isLoggedIn', true)
         })
     }
-})
+}])
 
 // Main Route
 FlowRouter.route('/', {
@@ -14,19 +14,18 @@ FlowRouter.route('/', {
     }
 })
 
-// Account Routes
-let account = FlowRouter.group({ prefix: '/user' })
-account.route('/login', {
+// connection links
+FlowRouter.route('/login', {
     action(params, queries) {
         BlazeLayout.render( 'app', { main: 'login' } );
     }
 })
-account.route('/signup', {
+FlowRouter.route('/signup', {
     action(params, queries) {
         BlazeLayout.render( 'app', { main: 'signup' } );
     }
 })
-account.route('/logout', {
+FlowRouter.route('/logout', {
     triggersEnter() {
         Meteor.call('killSession', JSON.parse(localStorage.getItem('Session')).id, ()=>{
             localStorage.removeItem('Session')
@@ -35,7 +34,9 @@ account.route('/logout', {
         })
     }
 })
-account.route('/:username', {
+
+// Account Routes
+FlowRouter.route('/user/:username', {
     action(params, queries) {
         BlazeLayout.render( 'app', { main: 'user' } );
     }
@@ -71,6 +72,6 @@ FlowRouter.route('/play/:gameid', {
 // 404 Route
 FlowRouter.notFound = {
     action(params, queries) {
-        FlowRouter.redirect('/')
+        BlazeLayout.render( 'app', { main: 'notFound' } );
     }
 }

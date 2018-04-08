@@ -1,7 +1,11 @@
 <template name='boardList'>
-    {{#each board in getBoards}}
-        <a href='/play/{{ board._id }}'><h1>{{ board.name }}</h1></a>
-        <h2>By {{ board.creator }}</h2>
-        {{> previewBoard row=board.board}}
-    {{/each}}
+    <div class='boardList'>
+        {{#each board in getBoards}}
+        <div class='game'>
+            <a href='/play/{{ board._id }}'><h1>{{ board.name }}</h1></a>
+            <h2>By {{ board.creator.name }}</h2>
+            {{> previewBoard row=board.board}}
+        </div>
+        {{/each}}
+    </div>
 </template>

@@ -10,7 +10,9 @@ Template.boardList.onCreated(()=>{
 })
 
 Template.boardList.helpers({
-    'getBoards'() { return boardsList.get() }
+    'getBoards'() {
+        return boardsList.get().filter(board => board.players.length < 2)
+    }
 })
 
 Template.boardList.events({

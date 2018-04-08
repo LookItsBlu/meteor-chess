@@ -16,7 +16,7 @@ export default {
         return Chessboards.insert({
             'name' : gamename,
             'board' : BOARD_TEMPLATE,
-            'creator' : Users.findOne({ '_id' : userid }).name,
+            'creator' : Users.findOne({ '_id' : userid }),
             'players' : [userid]
         }, (err, result) => result)
     },
@@ -42,5 +42,7 @@ export default {
     'getBoards': () => ( Chessboards.find().fetch() ),
     'getBoardById': (boardid) => ( Chessboards.findOne({ '_id' : boardid }) ),
 
-    'resetBoard': (chess_id) => { Chessboards.update({ '_id' : chess_id}, { $set : { 'board' : BOARD_TEMPLATE } }) }
+    'resetBoard': (chess_id) => { Chessboards.update({ '_id' : chess_id}, { $set : { 'board' : BOARD_TEMPLATE } }) },
+
+    'stopGame': (userid) => { Chessboards.remove({}) }
 }
